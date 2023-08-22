@@ -17,6 +17,8 @@ class SolaxCom:
                 rs =  max_address - i + 1
 
             resp = self.c.read_input_registers(i, rs)
+            if not resp:
+                raise(Exception(f"SOLAX: Bad read from address 0x{i:04x}"))
             #print(i, len(resp), read_size, rs)
             self.alld += resp
     def __getitem__(self, i):
