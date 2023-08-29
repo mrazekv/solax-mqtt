@@ -10,7 +10,7 @@ class SolaxCom:
         max_address = 0x0120 # including this number
         # read all data in batch
         self.alld = []
-        read_size = 64
+        read_size = 16
         for i in range(0,max_address + 1, read_size):
             rs = read_size
             if i + rs > max_address:

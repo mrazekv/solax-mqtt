@@ -15,7 +15,7 @@ if __name__=="__main__":
 
     def do_something(scheduler):
         # schedule the next call first
-        scheduler.enter(20, 1, do_something, (scheduler,))
+        scheduler.enter(60, 1, do_something, (scheduler,))
         logging.log(0, "Refresh")
         try:
             exporter.export_all(solax=solax, mqtt=mqtt)
