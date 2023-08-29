@@ -6,11 +6,14 @@ from exporter import Exporter
 import sched, time  
 import sys
 import logging
+import yaml
 
 
 if __name__=="__main__":
-    solax = SolaxCom()
-    mqtt = MqttLocal()    
+    config = yaml.load(open("config.yaml").read(), Loader=yaml.FullLoader)
+
+    solax = SolaxCom(config["solax"]["address"], config["solax"]["sn"])
+    mqtt = MqttLocal(**config["mqtt"])  
     exporter = Exporter()
 
     def do_something(scheduler):

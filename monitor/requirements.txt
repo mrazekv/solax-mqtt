@@ -1,0 +1,5 @@
+numpy==1.19.5
+paho_mqtt==1.6.1
+PyYAML==6.0.1
+Requests==2.31.0
+solax==0.3.2
