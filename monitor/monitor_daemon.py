@@ -6,16 +6,22 @@ from exporter import Exporter
 import sched, time  
 import sys
 import logging
+import yaml
+import pathlib
+import os
 
 
 if __name__=="__main__":
-    solax = SolaxCom()
-    mqtt = MqttLocal()    
+    top_path = pathlib.Path(__file__).parent.resolve()
+    config = yaml.load(open(os.path.join(top_path, "config.yaml")).read(), Loader=yaml.FullLoader)
+
+    solax = SolaxCom(config["solax"]["address"], config["solax"]["sn"])
+    mqtt = MqttLocal(**config["mqtt"])  
     exporter = Exporter()
 
     def do_something(scheduler):
         # schedule the next call first
-        scheduler.enter(20, 1, do_something, (scheduler,))
+        scheduler.enter(60, 1, do_something, (scheduler,))
         logging.log(0, "Refresh")
         try:
             exporter.export_all(solax=solax, mqtt=mqtt)

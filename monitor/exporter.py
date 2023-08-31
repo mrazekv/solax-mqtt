@@ -2,40 +2,37 @@ import numpy as np
 import csv
 import os
 
-class Exporter:
-    def __init__(self, filename = "regs.csv"):
-        # load input register file
-        self.registers = []
-        dd = os.path.dirname(__file__)
+#from solaxcom import X3HybridG4
+from solax.units import Units
+from solax.inverters import X3HybridG4
 
-        with open(os.path.join(dd, filename),"r") as fconf:
-            csv_conv = csv.reader(fconf, delimiter=",")
-            for row in csv_conv:
-                if len(row) != 8:
-                    print("## skipping ", row)
-                    continue
-                self.registers.append(row)
+class Exporter:
+    def __init__(self):
+        # load input register file
+        pass
 
     def export_all(self, solax, mqtt, verbose=False):
         solax.reload()
-        for row in self.registers:    
-            address, name, _, note, scale, unit, dtype, length = row
-            if "+" in address:
-                rval = 0
-                for a in  address.split("+"):
-                    v = solax[int(a, 0)]
-                    rval = (rval << 16) |  v
-
-
-
+        for (name), j in X3HybridG4.response_decoder().items():
+            if len(j) == 3:
+                (id, unit_or_measurement, fn) = j
             else:
-                rval = solax[int(address, 0)]
-            val = rval
+                (id, unit_or_measurement) = j
+                fn = lambda x: x
 
-            val = np.array(val).astype(dtype).item()
+            if type(id) is int:
+                val =  solax.alld[id]
+            else:
+                ids, pack_fn = id
+                val = pack_fn(*[solax.alld[i] for i in ids])
 
-            if scale:
-                val *= float(scale)
             if verbose:
-                print(name, " = ", val, unit)
-            mqtt[name] = val
+                r_unit = "???"
+                if isinstance(unit_or_measurement, Units):
+                    r_unit = unit_or_measurement.value
+                else:
+                    r_unit = unit_or_measurement.unit.value
+            
+                print(name, " = ", fn(val), r_unit) #, unit.value)
+
+            mqtt[name.replace(" ", "")] = fn(val)

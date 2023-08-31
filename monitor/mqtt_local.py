@@ -5,16 +5,13 @@ import logging
 import time
 
 class MqttLocal:
-    # username = 'emqx'
-    # password = 'public'
-
-    def __init__(self):
-        broker = 'localhost'
-        port = 1883
-        self.topic = "solax"
+    def __init__(self, server, user, password, port, topic):
+        self.topic = topic
+        self.user = user
+        self.password = password
         client_id = f'python-mqtt-{random.randint(0, 1000)}'
-        self.client = self.connect_mqtt(client_id, broker, port)
-        pass
+        self.client = self.connect_mqtt(client_id, server, port)
+
 
     def connect_mqtt(self, client_id, broker, port):
         def on_connect(client, userdata, flags, rc):
@@ -24,7 +21,9 @@ class MqttLocal:
                 print("Failed to connect, return code %d\n", rc)
         # Set Connecting Client ID
         client = mqtt_client.Client(client_id)
-        # client.username_pw_set(username, password)
+        if self.user:
+            client.username_pw_set(self.user, self.password)
+
         client.on_connect = on_connect
         client.on_disconnect = self.on_disconnect
         client.connect(broker, port)

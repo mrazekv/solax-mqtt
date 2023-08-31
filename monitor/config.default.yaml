@@ -1,0 +1,10 @@
+solax:
+  address: # todo add IP address
+  sn: #todo add SN
+
+mqtt:
+  server: localhost
+  user: null
+  password: null
+  topic: solax
+  port: 1883
