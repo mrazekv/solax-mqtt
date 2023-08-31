@@ -1,0 +1,153 @@
+0x0000,GridVoltage(X1),R,GridVoltage,0.1,V,uint16,1
+0x0001,GridCurrent(X1),R,GridCurrent,0.1,A,int16,1
+0x0002,GridPower(X1),R,GridPower,1,W,int16,1
+0x0003,PvVoltage1,R,PvVoltage1,0.1,V,uint16,1
+0x0004,PvVoltage2,R,PvVoltage2,0.1,V,uint16,1
+0x0005,PvCurrent1,R,PvCurrent1,0.1,A,uint16,1
+0x0006,PvCurrent2,R,PvCurrent2,0.1,A,uint16,1
+0x0007,GridFrequency(X1),R,GridFrequency,0.01,Hz,uint16,1
+0x0008,Temperature,R,radiator temperature,1,°C,int16,1
+0x0009,RunMode,R,Table 2-2 Run mode description,,,uint16,1
+0x000A,Powerdc1,R,Powerdc1,1,W,uint16,1
+0x000B,Powerdc2,R,Powerdc2,1,W,uint16,1
+0x000C,TemperFaultValue,R,TemperFaultValue,1,°C,int16,1
+0x000D,Pv1VoltFaultValue,R,Pv1VoltFaultValue,0.1,V,uint16,1
+0x000E,Pv2VoltFaultValue,R,Pv2VoltFaultValue,0.1,V,uint16,1
+0x000F,GfciFaultValue,R,GfciFaultValue,1,mA,uint16,1
+0x0010,GridVoltFaultValue,R,GridVoltFaultValue,0.1,V,uint16,1
+0x0011,GridFreqFaultValueT,R,GridFreqFaultValueT,0.01,Hz,uint16,1
+0x0012,DciFaultValue,R,DciFaultValue,1,mA,uint16,1
+0x0013,TimeCountDown,R,TimeCountDown,1,ms,uint16,1
+0x0014,BatVoltage_Charge1,R,BatVoltage_Charge1,0.1,V,int16,1
+0x0015,BatCurrent_Charge1,R,BatCurrent_Charge1,0.1,A,int16,1
+0x0016,Batpower_Charge1,R,Batpower_Charge1,1,W,int16,1
+0x0017,BMS_Connect_State,R,0:Disconnected 1:Connected,,,uint16,1
+0x0018,TemperatureBat,R,TemperatureBat,1,℃,int16,1
+0x0019,BDCStatus,R,0: discharge 1: charge 2: stop ,,,uint16,1
+0x001A,GridStatus,R,0: OnGrid 1: OffGrid,,,uint16,1
+0x001B,MPPTCount,R,MPPTCount,1,,uint16,1
+0x001C,BatteryCapacity,R,Battery capacity,1,%,uint16,1
+0x001D,OutputEnergy_Charge.LSB,R,OutputEnergy_Charge,0.1,kWh,uint16,1
+0x001E,OutputEnergy_Charge.MSB,R,OutputEnergy_Charge,0.1,kWh,uint16,1
+0x0020,OutputEnergy_Charge_today,R,OutputEnergy_Charge_today,0.1,kWh,uint16,1
+0x0021,InputEnergy_Charge.LSB,R,InputEnergy_Charge,0.1,kWh,uint16,1
+0x0022,InputEnergy_Charge.MSB,R,InputEnergy_Charge,0.1,kWh,uint16,1
+0x0023,InputEnergy_Charge_today,R,InputEnergy_Charge_today,0.1,kWh,uint16,1
+0x0024,BMS ChargeMaxCurrent,R,BMS ChargeMaxCurrent (real time),0.1,A,uint16,1
+0x0025,BMS DischargeMaxCurrent,R,BMS DischargeMaxCurrent (real time),0.1,A,uint16,1
+0x0027+0x0026,BMS_BatteryCapacity,R,BMS_BatteryCapacity,,Wh,uint16,1
+0x003E,PCSMajorFault,R,PCSMajorFault,,,uint16,1
+0x003F,BatteryMajorFault,R,BatteryMajorFault,,,uint16,1
+0x0040,InvFaultMessage.LSB,R,Inverter error code,,,uint16,1
+0x0041,InvFaultMessage.MSB,R,,,,uint16,1
+0x0043,Mgr FaultMessage,R,Table 2-5 Manager error code ,,,uint16,1
+0x0044,Bat_BMS_FaultMessage.LSB,R,,,,uint16,1
+0x0045,Bat_BMS_FaultMessage.MSB,R,,,,uint16,1
+0x0047+0x0046,feedin_power,R,Feedin power is obtained from Meter or CT.(Postive mean generate power; Negative mean consumed power,1,W,int32,2
+0x0049+0x0048,feedin_energy_total(meter),R,energy to the grid,0.01,kWh,uint32,2
+0x004B+0x004A,consum_energy_total(meter),R,energy form the grid,0.01,kWh,uint32,2
+0x004C,Off-gridVoltage(X1),R,Off-grid Voltage,0.1,V,uint16,1
+0x004D,Off-gridCurrent(X1),R,Off-grid Current,0.1,A,uint16,1
+0x004E,Off-gridPower(X1),R,Off-grid power,1,VA,uint16,1
+0x004F,Off-gridFrequency(X1),R,Off-grid _Frequency,0.01,Hz,uint16,1
+0x0050,Etoday_togrid,R,Today Energy (Inverter AC Port),0.1,kWh,uint16,1
+0x0053+0x0052,Etotal_togrid,R,Total Energy (Inverter AC Port),0.1,kWh,uint32,2
+0x0054,Lock State,R,0:locked 1:unlocked,,,uint16,1
+0x0066,BusVolt,R,BusVolt,0.1,V,uint16,1
+0x0067,wDcvFaultVal,R,wDcvFaultVal,0.1,V,uint16,1
+0x0068,wOverLoadFaultval,R,wOverLoadFaultval,1,W,uint16,1
+0x0069,wBatteryVoltFaultVal,R,wBatteryVoltFaultVal,0.1,V,uint16,1
+0x006A,GridVoltage_R(X3),R,GridVoltage_R,0.1,V,uint16,1
+0x006B,GridCurrent_R(X3),R,GridCurrent_R,0.1,A,int16,1
+0x006C,GridPower_R(X3),R,GridPower_R,1,W,int16,1
+0x006D,GridFrequency_R(X3),R,GridFrequency_R,0.01,Hz,uint16,1
+0x006E,GridVoltage_S(X3),R,GridVoltage_S,0.1,V,uint16,1
+0x006F,GridCurrent_S(X3),R,GridCurrent_S,0.1,A,int16,1
+0x0070,GridPower_S(X3),R,GridPower_S,1,W,int16,1
+0x0071,GridFrequency_S(X3),R,GridFrequency_S,0.01,Hz,uint16,1
+0x0072,GridVoltage_T(X3),R,GridVoltage_T,0.1,V,uint16,1
+0x0073,GridCurrent_T(X3),R,GridCurrent_T,0.1,A,int16,1
+0x0074,GridPower_T(X3),R,GridPower_T,1,W,int16,1
+0x0075,GridFrequency_T(X3),R,GridFrequency_T,0.01,Hz,uint16,1
+0x0076,Off-grid_Volt_R(X3),R,Off-grid_Volt_R,0.1,V,uint16,1
+0x0077,Off-grid_Current_R(X3),R,Off-grid_Current_R,0.1,A,uint16,1
+0x0078,Off-grid_PowerActive_R(X3),R,Off-grid_PowerActive_R,1,W,int16,1
+0x0079,Off-grid_PowerS_R(X3),R,Off-grid_PowerS_R,1,VA,uint16,1
+0x007A,Off-grid_Volt_S(X3),R,Off-grid_Volt_S,0.1,V,uint16,1
+0x007B,Off-grid_Current_S(X3),R,Off-grid_Current_S,0.1,A,uint16,1
+0x007C,Off-gridPowerActive_S(X3),R,Off-gridPowerActive_S,1,W,int16,1
+0x007D,Off-gridPowerS_S(X3),R,Off-gridPowerS_S,1,VA,uint16,1
+0x007E,Off-grid_Volt_T(X3),R,Off-grid_Volt_T,0.1,V,uint16,1
+0x007F,Off-grid_Current_T(X3),R,Off-grid_Current_T,0.1,A,uint16,1
+0x0080,Off-gridPowerActive_T(X3),R,Off-gridPowerActive_T,1,W,int16,1
+0x0081,Off-gridPowerS_T(X3),R,Off-gridPowerS_T,1,VA,uint16,1
+0x0083+0x0082,FeedinPower_Rphase(X3),R,FeedinPower_Rphase,1,W,int32,2
+0x0085+0x0084,FeedinPower_Sphase(X3),R,FeedinPower_Sphase,1,W,int32,2
+0x0087+0x0086,FeedinPower_Tphase(X3),R,FeedinPower_Tphase,1,W,int32,2
+0x0089+0x0088,OngridRunTime,R,On-gridRunTime,0.1,h,int32,2
+0x008B+0x008A,OffgridRunTime,R,Off-gridRunTime,0.1,h,int32,2
+0x008F+0x008E,Off-gridYieldTotal,R,Off-gridYieldTotal,0.1,kWh,uint32,2
+0x0090,Off-gridYieldToday,R,Off-gridYieldToday,0.1,kWh,uint16,1
+0x0091,EchargeToday,R,EchargeToday (Inverter AC Port),0.1,kWh,uint16,1
+0x0093+0x0092,EchargeTotal,R,EchargeTotal (Inverter AC Port),0.1,kWh,uint32,2
+0x0095+0x0094,SolarEnergyTotal,R,SolarEnergyTotal,0.1,kWh,uint32,2
+0x0096,SolarEnergyToday,R,SolarEnergyToday,0.1,kWh,uint16,1
+0x0099+0x0098,feedin_energy_today,R,energy to the grid(meter),0.01,kWh,uint32,2
+0x009B+0x009A,consum_energy_today,R,energy form the grid(meter),0.01,kWh,uint32,2
+0x009C,InvVoltR(X3),R,InvVoltR(X3),0.1,V,uint16,2
+0x009D,InvVoltS(X3),R,InvVoltS(X3),0.1,V,uint16,2
+0x009E,InvVoltT(X3),R,InvVoltT(X3),0.1,V,uint16,2
+0x00A9+0x00A8,feedin_power_Meter2,R,power to the grid,1,W,int32,2
+0x00AB+0x00AA,feedin_energy_total_Meter2,R,energy to the grid,0.01,kWh,uint32,2
+0x00AD+0x00AC,consum_energy_total_Meter2,R,energy form the grid,0.01,kWh,uint32,2
+0x00AF+0x00AE,feedin_energy_today_Meter2,R,energy to the grid,0.01,kWh,uint32,2
+0x00B1+0x00B0,consum_energy_today_Meter2,R,energy form the grid,0.01,kWh,uint32,2
+0x00B3+0x00B2,FeedinPower_Rphase_Meter2,R,FeedinPower_Rphase(X3),1,W,int32,2
+0x00B5+0x00B4,FeedinPower_Sphase_Meter2,R,FeedinPower_Sphase(X3),1,W,int32,2
+0x00B7+0x00B6,FeedinPower_Tphase_Meter2,R,FeedinPower_Tphase(X3),1,W,int32,2
+0x00B8,Meter1CommunicationSate,R,0:Com Error 1:Normal,1,,uint16,1
+0x00B9,Meter2CommunicationSate,R,0:Com Error 1:Normal,1,,uint16,1
+0x00BA,Battery_Tem_High,R,Battery_Tem_High,0.1,°C,int16,1
+0x00BB,Battery_Tem_Low,R,Battery_Tem_Low,0.1,°C,int16,1
+0x00BC,Cell_Voltage_High,R,Cell_Voltage_High,0.001,V,uint16,1
+0x00BD,Cell_Voltage_Low,R,Cell_Voltage_Low,0.001,V,uint16,1
+0x00BE,BMS_UserSOC,R,BMS_UserSOC,1,%,uint16,1
+0x00BF,BMS_UserSOH,R,BMS_UserSOH,1,%,uint16,1
+0x00C0,GridReactivePower_Total_Meter,R,GridReactivePower_Total_Meter,1,Var,int16,1
+0x00C1,GridReactivePower_R_Meter,R,GridReactivePower_R_Meter,1,Var,int16,1
+0x00C2,GridReactivePower_S_Meter,R,GridReactivePower_S_Meter,1,Var,int16,1
+0x00C3,GridReactivePower_T_Meter,R,GridReactivePower_T_Meter,1,Var,int16,1
+0x00C4,GridPowerFactor_Total_Meter,R,GridPowerFactor_Total_Meter,0.01,,int16,1
+0x00C5,GridPowerFactor_R_Meter,R,GridPowerFactor_R_Meter,0.01,,int16,1
+0x00C6,GridPowerFactor_S_Meter,R,GridPowerFactor_S_Meter,0.01,,int16,1
+0x00C7,GridPowerFactor_T_Meter,R,GridPowerFactor_T_Meter,0.01,,int16,1
+0x00C8,GridFrequency_Meter,R,GridFrequency_Meter,0.01,Hz,uint16,1
+0x00C9,GridVoltage_Total_Meter,R,GridVoltage_Total_Meter,0.1,V,uint16,1
+0x00CA,GridVoltage_R_Meter,R,GridVoltage_R_Meter,0.1,V,uint16,1
+0x00CB,GridVoltage_S_Meter,R,GridVoltage_S_Meter,0.1,V,uint16,1
+0x00CC,GridVoltage_T_Meter,R,GridVoltage_T_Meter,0.1,V,uint16,1
+0x00CD,GridCurrent_Total_Meter,R,GridCurrent_Total_Meter,0.1,A,int16,1
+0x00CE,GridCurrent_R_Meter,R,GridCurrent_R_Meter,0.1,A,int16,1
+0x00CF,GridCurrent_S_Meter,R,GridCurrent_S_Meter,0.1,A,int16,1
+0x00D0,GridCurrent_T_Meter,R,GridCurrent_T_Meter,0.1,A,int16,1
+0x0100,ModbusPowerControl,R,0:disable remote control/1:enable power control/2:enable electric quantity control/3:enable SOC target control,1,,uint16,1
+0x0101,TargetFinishFlag,R,0:unfinished 1:finish,,,uint16,1
+0x0103+0x0102,ActivePowerTarget,R,ActivePowerTarget ,1,W,int32,2
+0x0105+0x0104,wReactivePowerTarget,R,wReactivePowerTarget ,1,Var,int32,2
+0x0107+0x0106,wActivePowerReal,R,wActivePowerReal,1,W,int32,2
+0x0109+0x0108,wReactivePowerReal,R,wReactivePowerReal,1,Var,int32,2
+0x010B+0x010A,wActivePower_Upper,R,wActivePower_Upper,1,W,int32,2
+0x010D+0x010C,wActivePower_Lower,R,wActivePower_Lower,1,W,int32,2
+0x010F+0x010E,wReactivePower_Upper,R,wReactivePowe_Upper,1,Var,int32,2
+0x0111+0x0110,wReactivePower_Lower,R,wReactivePower_Lower,1,Var,int32,2
+0x0113+0x0112,TargetEnergy,R,TargetEnergy,1,Wh,int32,2
+0x0115+0x0114,Charge_Discharg_Power,R,Charge_Discharg_Power,1,W,int32,2
+0x0117+0x0116,ChargeableElectricCapacity,R,ChargeableElectricCapacity,1,Wh,uint32,2
+0x0119+0x0118,DischargeableElectricCapacity,R,DischargeableElectricCapacity,1,Wh,uint32,2
+0x011A,Time_of_Duration,R,Time_of_Duration,1,s,uint16,1
+0x011B,TargetSoc,R,TargetSoc,1,%,uint16,1
+0x011C,SocUpper,R,SocUpper,1,%,uint16,1
+0x011D,SocLower,R,SocLower,1,%,uint16,1
+0x011E,RemoteCtrlTimeOut,R,RemoteCtrlTimeOut(4~65535,1,s,uint16,1
+0x011F,wBatteryForceChargeFlag,R,0:No Action 1:Force Charge,1,,uint16,1
+0x0120,wBMSRelayState,R,0:OFF 1:ON 1,,,uint16,1

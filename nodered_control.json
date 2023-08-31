@@ -1,0 +1,508 @@
+[
+    {
+        "id": "b6bad366b997d49a",
+        "type": "function",
+        "z": "25681ab80c4d26f7",
+        "name": "StoreState",
+        "func": "flow.set(\"bojler_state\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "ba2a00dd548fd386",
+                "2b92b6414c8477d1",
+                "185c9e3fafa0e163"
+            ]
+        ]
+    },
+    {
+        "id": "189448ccaa974449",
+        "type": "switch",
+        "z": "25681ab80c4d26f7",
+        "name": "",
+        "property": "disable_on",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 690,
+        "y": 360,
+        "wires": [
+            [
+                "b6bad366b997d49a"
+            ],
+            [
+                "b6bad366b997d49a"
+            ],
+            [
+                "b82ecd3b305debad"
+            ]
+        ]
+    },
+    {
+        "id": "dbc16299b0455a90",
+        "type": "switch",
+        "z": "25681ab80c4d26f7",
+        "name": "1->0?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "bojler_state",
+                "vt": "flow"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 240,
+        "wires": [
+            [
+                "524e2f37f7bcd31b",
+                "b6bad366b997d49a"
+            ],
+            [
+                "b6bad366b997d49a"
+            ]
+        ]
+    },
+    {
+        "id": "ba2a00dd548fd386",
+        "type": "debug",
+        "z": "25681ab80c4d26f7",
+        "name": "boiler",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "185c9e3fafa0e163",
+        "type": "function",
+        "z": "25681ab80c4d26f7",
+        "name": "invert",
+        "func": "msg.payload = 1-msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 380,
+        "wires": [
+            [
+                "c7c1d7f87ec7784c"
+            ]
+        ]
+    },
+    {
+        "id": "f83e4d9086451760",
+        "type": "switch",
+        "z": "25681ab80c4d26f7",
+        "name": "Zapnuto?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "dbc16299b0455a90"
+            ],
+            [
+                "189448ccaa974449"
+            ],
+            [
+                "5be79fb781542c12"
+            ]
+        ]
+    },
+    {
+        "id": "b82ecd3b305debad",
+        "type": "debug",
+        "z": "25681ab80c4d26f7",
+        "name": "debug 24",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "524e2f37f7bcd31b",
+        "type": "function",
+        "z": "25681ab80c4d26f7",
+        "name": "disable on",
+        "func": "flow.set(\"disable_on\", true);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 240,
+        "wires": [
+            [
+                "0c9baa3c7e1684d2"
+            ]
+        ]
+    },
+    {
+        "id": "c7c1d7f87ec7784c",
+        "type": "rpi-gpio out",
+        "z": "25681ab80c4d26f7",
+        "name": "Inverted control",
+        "pin": "14",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1240,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "119605546991b215",
+        "type": "function",
+        "z": "25681ab80c4d26f7",
+        "name": "function 4",
+        "func": "var s = msg.payload;\nvar next_state = 0;\nvar current_state = flow.get(\"bojler_state\") || 0;\nvar d = new Date();\n\n\n// jede se z elektriky? nebo vybitá baterka vypnout!\nif(s.onGridPower < -500 || s.baterySOC < 79 || d.getHours() >= 18) {\n    next_state = 0;\n}\n// je nabita baterka\nelse if(s.batterySOC > 80) {\n    // neni zaple, baterka se nabiji dostatecnym proudem a neni zatizena tato faze\n    if(!current_state && (s.batteryPower > 3000 || s.batterySOC >= 97) && s.gridPowerL3 < 3000) {\n        next_state = 1;\n    }\n    // je zaple a necerpa se baterka\n    else if(current_state && s.batteryPower > -500) {\n        next_state = 1;\n    }\n    else {\n        next_state = 0;\n    }\n}\n\nmsg.payload = next_state;\nmsg.topic = \"bojler_state\"\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "f83e4d9086451760",
+                "22ed22ce9f44349e"
+            ]
+        ]
+    },
+    {
+        "id": "caa1a69dfa7db149",
+        "type": "inject",
+        "z": "25681ab80c4d26f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "f83e4d9086451760"
+            ]
+        ]
+    },
+    {
+        "id": "d4d465376fe287ca",
+        "type": "inject",
+        "z": "25681ab80c4d26f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "f83e4d9086451760"
+            ]
+        ]
+    },
+    {
+        "id": "2acbfadb62557cde",
+        "type": "inject",
+        "z": "25681ab80c4d26f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 350,
+        "y": 360,
+        "wires": [
+            [
+                "f83e4d9086451760"
+            ]
+        ]
+    },
+    {
+        "id": "874f8c425c66e26c",
+        "type": "switch",
+        "z": "25681ab80c4d26f7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "gridPower",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 600,
+        "wires": [
+            [
+                "119605546991b215",
+                "39eb0f551a0d55ce"
+            ],
+            [
+                "39eb0f551a0d55ce",
+                "f83e4d9086451760"
+            ]
+        ],
+        "outputLabels": [
+            "ok",
+            "unset"
+        ]
+    },
+    {
+        "id": "5be79fb781542c12",
+        "type": "debug",
+        "z": "25681ab80c4d26f7",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0c9baa3c7e1684d2",
+        "type": "trigger",
+        "z": "25681ab80c4d26f7",
+        "name": "",
+        "op1": "",
+        "op2": "0",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "2",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1050,
+        "y": 240,
+        "wires": [
+            [
+                "c5b63af7a7603470"
+            ]
+        ]
+    },
+    {
+        "id": "22ed22ce9f44349e",
+        "type": "debug",
+        "z": "25681ab80c4d26f7",
+        "name": "boiler",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 490,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "302741eeec584505",
+        "type": "change",
+        "z": "25681ab80c4d26f7",
+        "name": "read",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "solax",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 90,
+        "y": 600,
+        "wires": [
+            [
+                "874f8c425c66e26c"
+            ]
+        ],
+        "icon": "node-red/db.svg"
+    },
+    {
+        "id": "39eb0f551a0d55ce",
+        "type": "debug",
+        "z": "25681ab80c4d26f7",
+        "name": "debug 26",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "c5b63af7a7603470",
+        "type": "function",
+        "z": "25681ab80c4d26f7",
+        "name": "enable on",
+        "func": "flow.set(\"disable_on\", false);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc3bc7617bb80052",
+        "type": "inject",
+        "z": "25681ab80c4d26f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "302741eeec584505"
+            ]
+        ]
+    }
+]
