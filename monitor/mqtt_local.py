@@ -1,5 +1,5 @@
 
-from paho.mqtt import client as mqtt_client
+import paho.mqtt.client as mqtt
 import random
 import logging
 import time
@@ -14,13 +14,13 @@ class MqttLocal:
 
 
     def connect_mqtt(self, client_id, broker, port):
-        def on_connect(client, userdata, flags, rc):
-            if rc == 0:
+        def on_connect(client, userdata, flags, reason_code, properties):
+            if reason_code == 0:
                 print("Connected to MQTT Broker!")
             else:
-                print("Failed to connect, return code %d\n", rc)
+                print("Failed to connect, return code %d\n", reason_code)
         # Set Connecting Client ID
-        client = mqtt_client.Client(client_id)
+        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
         if self.user:
             client.username_pw_set(self.user, self.password)
 
@@ -29,8 +29,8 @@ class MqttLocal:
         client.connect(broker, port)
         return client
 
-
-    def on_disconnect(self, client, userdata, rc):
+    # (client, userdata, disconnect_flags, reason_code, properties)
+    def on_disconnect(self, client, userdata, disconnect_flags, rc, params):
         FIRST_RECONNECT_DELAY = 1
         RECONNECT_RATE = 2
         MAX_RECONNECT_COUNT = 12
