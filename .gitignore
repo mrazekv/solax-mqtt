@@ -1,0 +1,7 @@
+__pycache__
+.vscode
+/monitor_*
+config.yaml
+nodered.json
+nohup.out
+/regs.csv
